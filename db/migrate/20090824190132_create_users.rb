@@ -4,10 +4,18 @@ class CreateUsers < ActiveRecord::Migration
 
     create_table :users do |t|
       t.string     :login, :null => false
-      t.string     :pwd, :null => false
-      t.string     :salt, :null => false
-      t.timestamp  :last_login_at
-      t.timestamp  :last_logout_at
+      t.string     :crypted_password, :null => false
+      t.string     :password_salt, :null => false
+      t.string     :persistence_token, :null => false
+      t.integer    :login_count, :null => false, :default => 0
+      t.integer    :failed_login_count, :null => false, :default => 0
+      t.datetime   :last_request_at
+      t.datetime   :current_login_at
+      t.datetime   :last_login_at
+      t.string     :current_login_ip
+      t.string     :last_login_ip
+      t.boolean    :is_admin, :null => false, :default => false
+      t.integer    :person_id, :null => false
       t.integer    :status_group_id, :null => false
       t.integer    :status_id, :null => false
       t.timestamps
@@ -15,15 +23,12 @@ class CreateUsers < ActiveRecord::Migration
 
     add_index :users, [:login], :unique => true, :case_sensitive => false
 
-    execute("INSERT INTO USERS (
-             LOGIN, PWD, SALT, LAST_LOGIN_AT, LAST_LOGOUT_AT, STATUS_GROUP_ID, STATUS_ID, CREATED_AT, UPDATED_AT
-             ) VALUES (
-             'flavor', '3333', '3333', '08.06.1967 08:10:00', '08.06.1967 08:10:00', 1, 1, '08.06.1967 08:10:00', '08.06.1967 08:10:00'
-    )")
+    fk :users, :person_id, :people
 
   end
 
   def self.down
+    drop_fk :users, :person_id
     drop_table :users
   end
 end

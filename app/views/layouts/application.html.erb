@@ -1,0 +1,59 @@
+<% domready = false -%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="content-language" content="de">
+    <meta name="description" content="<%= yield :description %>">
+    <meta name="keywords" content="<%= yield :keywords %>">
+    <link rel="shortcut icon" href="/images/icons/favicon.ico"/>
+    <title><%= h(yield(:title) || "Untitled") %></title>
+    <%= stylesheet_link_tag "application" %>
+  </head>
+  <body>
+    <div id="content">
+      <div id="header">
+        <div id="user_navigation">
+          <% if current_user %>
+            <%= link_to "Edit Profile", edit_user_path(:current) %> |
+            <%= link_to "Logout", logout_path %> |
+            <% if admin? %>
+              <%= link_to "Administration", logout_path %>
+            <% end %>
+          <% else %>
+            <%= link_to "Register", new_user_path %> |
+            <%= link_to "Login", login_path %>
+          <% end %>
+        </div>
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+        <% if flash[:notice] %>
+          <div style="line-height:2em; padding:10px;color:#fff"> <%= flash[:notice] %></div>
+        <% end %>
+      </div>
+      <div id="body">
+        <%= yield %>
+      </div>
+      <div id="footer">
+        <%= link_to image_tag("logos/mylugo.gif", :alt => "mylugo.de"), "http://mylugo.de", { :id => "mylugo_logo" } -%>
+      </div>
+    </div>
+    <!-- ++++++++++++++++++++++++++++++ SCRIPT START ++++++++++++++++++++++++++++++ -->
+    <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js",
+                               "https://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.2/effects.js",
+                               "https://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.2/controls.js",
+                               "application" -%>
+    <% domready = true -%>
+    <% if domready == true %>
+      <% javascript_tag do %>
+        <% if current_user %>
+          on_page_ready();
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= yield :javascript_code %>
+    <!-- ++++++++++++++++++++++++++++++ SCRIPT END ++++++++++++++++++++++++++++++++ -->
+  </body>
+</html>

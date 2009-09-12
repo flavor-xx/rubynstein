@@ -1,0 +1,12 @@
+<% form_for @user_session do |u| %>
+    <%= u.error_messages %>
+    <p>
+      <%= u.label :login %><br />
+      <%= u.text_field :login %>
+    </p>
+    <p>
+      <%= u.label :password %><br />
+      <%= u.password_field :password %>
+    </p>
+    <p><%= u.submit "Login" %></p>
+<% end %>

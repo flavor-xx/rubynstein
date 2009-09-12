@@ -1,0 +1,20 @@
+<% form_for @user do |u| %>
+    <%= u.error_messages %>
+    <p>
+      <%= u.label :login %><br />
+      <%= u.text_field :login %>
+    </p>
+    <p>
+      <%= u.label :password %><br />
+      <%= u.password_field :password %>
+    </p>
+    <p>
+      <%= u.label :password_confirmation %><br />
+      <%= u.password_field :password_confirmation %>
+    </p>
+    <p>
+      <%= u.label :is_admin %><br />
+      <%= u.check_box :is_admin %>
+    </p>
+    <p><%= u.submit "Speichern" %></p>
+<% end %>
