@@ -1,1 +1,19 @@
-<%= render :partial => "/users/form"%>
+<% content_for :javascript_code do %>
+	<%= js_focus_on_element "user_login" %>
+<% end %>
+<% form_for @user do |f| %>
+    <%= f.error_messages %>
+    <p>
+      <%= f.label :login %><br />
+      <%= f.text_field :login %>
+    </p>
+    <p>
+      <%= f.label :password %><br />
+      <%= f.password_field :password %>
+    </p>
+    <p>
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %>
+    </p>
+		<%= f.submit "Registrieren" %></p>
+<% end %>

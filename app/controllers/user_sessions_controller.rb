@@ -1,6 +1,7 @@
 class UserSessionsController < ApplicationController
 
-  before_filter :authorize_logged_in, :except => :destroy
+  before_filter :require_not_logged_in, :only => [:new, :create]
+  before_filter :require_logged_in, :only => :destroy
 
   def new
     @user_session = UserSession.new
@@ -9,17 +10,16 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      flash[:notice] = "Successfully logged in."
-      redirect_to root_url
+      flash[:notice] = "Login successful!"
+      redirect_to root_path
     else
       render :action => 'new'
     end
   end
 
   def destroy
-    @user_session = UserSession.find
-    @user_session.destroy
-    flash[:notice] = "Successfully logged_out."
-    redirect_to root_url
+    current_user_session.destroy
+    flash[:notice] = "Logout successful!"
+    redirect_to login_path
   end
 end

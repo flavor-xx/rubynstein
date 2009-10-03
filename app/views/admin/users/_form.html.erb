@@ -1,20 +1,25 @@
-<% form_for @user do |u| %>
-    <%= u.error_messages %>
+<% form_for [:admin, @user] do |f| %>
+    <%= f.error_messages %>
     <p>
-      <%= u.label :login %><br />
-      <%= u.text_field :login %>
+      <%= f.label :login %><br />
+      <%= f.text_field :login %>
     </p>
     <p>
-      <%= u.label :password %><br />
-      <%= u.password_field :password %>
+      <%= f.label :password %><br />
+      <%= f.password_field :password %>
     </p>
     <p>
-      <%= u.label :password_confirmation %><br />
-      <%= u.password_field :password_confirmation %>
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %>
     </p>
     <p>
-      <%= u.label :is_admin %><br />
-      <%= u.check_box :is_admin %>
+      <%= f.label :status_id %><br />
+      <%= f.text_field :status_id %>
     </p>
-    <p><%= u.submit "Speichern" %></p>
+    <p>
+      <%= f.label :is_admin %><br />
+      <%= f.check_box :is_admin %>
+    </p>
+    <p><%= f.submit "Speichern" %></p>
+		<p><%= link_to "Destroy", [:admin, @user], :confirm => 'Are you sure!', :method => :delete %></p>
 <% end %>

@@ -1,0 +1,15 @@
+<% content_for :javascript_code do %>
+	<%= js_render_partial_pagination %>
+	<%= js_render_partial_search %>
+<% end %>
+
+<%= render :partial => 'search'%>
+
+
+<div id="people">
+	<%= render :partial => 'people' %>
+</div>
+
+<p>
+<%= link_to 'New person', new_admin_person_path %>
+</p>

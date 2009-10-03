@@ -1,0 +1,29 @@
+<% content_for :javascript_code do %>
+	<%= js_render_partial_pagination %>
+	<%= js_render_partial_search %>
+	<%= js_hide_id_element 'search_people' %>
+<% end %>
+
+<% form_for [:lounge, @person], :person, :url => {:action => :update}, :html => {:class => "form_people", :id => "form_people" } do |f| %>
+	<%= f.error_messages %>
+	<p>
+	  <%= f.label :name %><br />
+	  <%= f.text_field :name %>
+	</p>
+	<p>
+	  <%= f.label :birthday %><br />
+	  <%= f.text_field :birthday %>
+	</p>
+	<p><%= f.submit "Speichern" %></p>
+<% end %>
+
+<div id="toggle">
+<%= js_button_toggle_id_element("Personensuche...", "search_people") %>
+</div>
+
+
+<div id="search_people">
+	<%= render :partial => 'search', :locals => { :person => @person } %>	
+	<%= render :partial => 'people', :id => 'people' %>
+</div>
+

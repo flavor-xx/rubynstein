@@ -1,0 +1,12 @@
+<%= link_to "Home", root_path %> |
+<% if current_user %>
+  <%= link_to "Logout (#{current_user.login})", logout_path %> |
+	<%= link_to "Lounge", lounge_lounge_index_path %>
+  <% if admin? %>
+		|
+    <%= link_to "Administration", admin_admin_index_path %>
+  <% end %>
+<% else %>
+  <%= link_to "Register", new_user_path %> |
+  <%= link_to "Login", login_path %>
+<% end %>

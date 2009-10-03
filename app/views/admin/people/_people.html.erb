@@ -1,0 +1,25 @@
+<p>
+<%= will_paginate @people %>
+</p>
+<table border="1" cellspacing="5" cellpadding="5">
+	<tr>
+		<th>Name</th>
+		<th>Status</th>
+    <th>StatusGroup</th>
+		<th>Edit</th>
+		<th>Destroy</th>
+	</tr>
+	<% for person in @people %>
+		<div class="person">
+			<tr>
+				<td><%= link_to h(person.name), edit_admin_person_path(person) %></td>
+				<td><%= person.status.name %></td>
+        <td><%= person.status_group.name %></td>
+				<div class="actions">
+					<td><%= link_to "Edit", edit_admin_person_path(person) %></td>
+					<td><%= link_to "Destroy", [:admin, person], :confirm => 'Are you sure!', :method => :delete %></td>
+				</div>
+			</tr>
+		</div>
+	<% end %>
+</table>

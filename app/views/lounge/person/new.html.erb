@@ -1,0 +1,19 @@
+<% content_for :javascript_code do %>
+	<%= js_render_partial_pagination %>
+	<%= js_render_partial_search %>
+<% end %>
+<% form_for [:lounge, @person], :person, :url => {:action => :create} do |f| %>
+	<%= f.error_messages %>
+	<p>
+	  <%= f.label :name %><br />
+	  <%= f.text_field :name %>
+	</p>
+	<p>
+	  <%= f.label :birthday %><br />
+	  <%= f.text_field :birthday %>
+	</p>
+	<p><%= f.submit "Lounge Person NEW" %></p>
+<% end %>
+	
+<%= render :partial => 'search' %>	
+<%= render :partial => 'people' %>

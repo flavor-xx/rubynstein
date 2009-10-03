@@ -1,4 +1,3 @@
-
 function on_page_ready() {
-    alert("Tach hier...")
+	//alert("Eingeloggt...")
 }

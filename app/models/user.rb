@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
   default_scope :conditions => "status_id != #{DELETED}"
 
-  #attr_accessible :login
-
   acts_as_authentic
 
   belongs_to :status_group
@@ -10,7 +8,15 @@ class User < ActiveRecord::Base
   belongs_to :person
 
   validates_presence_of :person_id, :message => "A user needs one person"
+  
+  attr_protected :is_admin
 
+  def self.search(search, page, per_page = 10)
+    paginate :per_page => per_page,
+             :page => page,
+             :conditions => ['login like ?', "%#{search}%"],
+             :order => 'login'
+  end
 
   def before_validation_on_create
     if self.person_id.nil?

@@ -30,17 +30,24 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
+  
+  map.namespace(:lounge) do |lounge|
+    lounge.resources :lounge
+    lounge.resources :user
+    lounge.resources :person, :member => {:set_to_current_user => :get}
+  end
+
+  map.namespace(:admin) do |admin|
+    admin.resources :admin
+    admin.resources :users
+    admin.resources :people    
+  end
+
   map.login "login", :controller => "user_sessions", :action => "new"
   map.logout "logout", :controller => "user_sessions", :action => "destroy"
 
   map.resources :user_sessions
   map.resources :users
-
-  map.resources :people
-
-  map.namespace(:admin) do |admin|
-    admin.resources :users
-  end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index_.html.
   map.root :controller => "home"
@@ -50,6 +57,6 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing or commenting them out if you're using named routes and resources.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  #map.connect ':controller/:action/:id'
+  #map.connect ':controller/:action/:id.:format'
 end

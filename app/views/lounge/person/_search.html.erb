@@ -1,0 +1,5 @@
+<div id="search">
+<% form_tag edit_lounge_person_path(person), :method => 'get', :id => 'new_search' do %>
+	<%= text_field_tag :search, params[:search] %>
+	<%= submit_tag "Suchen", :name => nil %>
+<% end -%>

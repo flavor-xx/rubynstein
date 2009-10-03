@@ -1,0 +1,36 @@
+<p>
+<%= will_paginate @users %>
+</p>
+<table border="1" cellspacing="5" cellpadding="5">
+	<tr>
+		<th>Login</th>
+		<th>Administrator</th>
+		<th>Person</th>
+		<th>Status</th>
+    <th>StatusGroup</th>
+		<th>Edit</th>
+		<th>Destroy</th>
+	</tr>
+	<% for user in @users %>
+		<div class="user">
+			<tr>
+				<td><%= link_to h(user.login), edit_admin_user_path(user) %></td>
+				<td><%= check_box_tag 'is_admin', 'true', user.is_admin, :disabled => true %></td>
+				<% if user.person.nil? %>
+					<td style="background: #E6E6E6">not available</td>
+				<% else %>
+					<td><%= link_to h(user.person.name), edit_admin_person_path(user.person) %></td>
+				<% end %>
+				<td><%= user.status.name %></td>
+        <td><%= user.status_group.name %></td>
+				<div class="actions">
+					<td><%= link_to "Edit", edit_admin_user_path(user) %></td>
+					<td><%= link_to "Destroy", [:admin, user], :confirm => 'Are you sure!', :method => :delete %></td>
+				</div>
+			</tr>
+		</div>
+	<% end %>
+</table>
+<p>
+<%= will_paginate @users %>
+</p>

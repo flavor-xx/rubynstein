@@ -1,0 +1,20 @@
+<% for res_id in ids %>
+<%=button_to_function "Show", "show_resource('#{res_id}')" %>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+  function show_resource(res_id)
+  {
+    jQuery("#resource_details").load( 'http://localhost:3000/resources/show/' + res_id).dialog('open');
+  }
+</script>
+
+
+##########
+
+<%= button_to_function "Save As Resolved",{'class' => 'itilbuttonlink1'} 
+do |page| 
+    page.visual_effect :BlindDown, 'here_call_sd_resolution_div' 
+ end %>
+
+##########

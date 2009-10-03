@@ -1,3 +1,7 @@
+<% content_for :javascript_code do %>
+	<%= js_focus_on_element "user_session_login" %>
+<% end %>
+</script>
 <% form_for @user_session do |u| %>
     <%= u.error_messages %>
     <p>
@@ -8,5 +12,5 @@
       <%= u.label :password %><br />
       <%= u.password_field :password %>
     </p>
-    <p><%= u.submit "Login" %></p>
+    <p><%= u.submit "Anmelden" %></p>
 <% end %>

@@ -11,20 +11,21 @@ module FsActiveRecordBase
   DELETED  = 4
 
   def before_validation
+    self.status_group_id = RECORDSTATUSGROUP
     p "before_validation"
   end
 
   def before_validation_on_create
+    self.status_id = INSERTED
     p "before_validation_on_create"
   end
 
   def before_validation_on_update
+    self.status_id = UPDATED
     p "before_validation_on_update"
   end
 
   def before_create
-    self.status_group_id = RECORDSTATUSGROUP
-    self.status_id = INSERTED
     p "before_create"
   end
 
@@ -34,7 +35,6 @@ module FsActiveRecordBase
   end
 
   def before_update
-    self.status_id = UPDATED
     p "before_update"
   end
 

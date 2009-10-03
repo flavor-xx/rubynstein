@@ -1,4 +1,5 @@
 class Admin::AdminController < ApplicationController
-
-  before_filter :authorize_admin
+  layout 'admin'
+  
+  before_filter :require_logged_in, :require_admin
 end

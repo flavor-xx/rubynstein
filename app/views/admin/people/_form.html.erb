@@ -1,0 +1,15 @@
+<% content_for :javascript_code do %>
+	<%= js_focus_on_element "person_name" %>
+<% end %>
+<% form_for [:admin, @person] do |f| %>
+	<%= f.error_messages %>
+	<p>
+	  <%= f.label :name %><br />
+	  <%= f.text_field :name %>
+	</p>
+	 <p>
+	   <%= f.label :status_id %><br />
+	   <%= f.text_field :status_id %>
+	 </p>
+	<p><%= f.submit "Speichern" %></p>
+<% end %>

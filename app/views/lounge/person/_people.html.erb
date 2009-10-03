@@ -1,0 +1,19 @@
+<div id="people">
+	<%= will_paginate @people %>
+	<table border="1" cellspacing="5" cellpadding="5">
+		<tr>
+			<th>Name</th>
+			<th>Status</th>
+	    <th>StatusGroup</th>
+		</tr>
+		<% for person in @people %>
+			<div class="person">
+				<tr>
+					<td><%= link_to h(person.name), set_to_current_user_lounge_person_path(person), :confirm => 'Are you sure!' %></td>
+					<td><%= person.status.name %></td>
+	        <td><%= person.status_group.name %></td>
+				</tr>
+			</div>
+		<% end %>
+	</table>
+</div>
